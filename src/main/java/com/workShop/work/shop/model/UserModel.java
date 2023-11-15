@@ -1,4 +1,4 @@
-package com.workShop.work.shop.entities;
+package com.workShop.work.shop.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class User implements Serializable {
+public class UserModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
