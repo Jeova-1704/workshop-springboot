@@ -1,4 +1,4 @@
-package com.workShop.work.shop.resources;
+package com.workShop.work.shop.controller;
 
 import com.workShop.work.shop.entities.User;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserResource {
+public class UserController {
 
     @GetMapping
     public ResponseEntity<User> findAll(){
