@@ -1,14 +1,8 @@
 package com.workShop.work.shop.config;
 
-import com.workShop.work.shop.model.CategoryModel;
-import com.workShop.work.shop.model.OrderModel;
-import com.workShop.work.shop.model.ProductModel;
-import com.workShop.work.shop.model.UserModel;
+import com.workShop.work.shop.model.*;
 import com.workShop.work.shop.model.enums.OrderStatus;
-import com.workShop.work.shop.repositories.CategoryRepository;
-import com.workShop.work.shop.repositories.OrderRepository;
-import com.workShop.work.shop.repositories.ProductRepository;
-import com.workShop.work.shop.repositories.UserRepository;
+import com.workShop.work.shop.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -65,5 +62,13 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategories().add(cat2);
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4,p5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
     }
 }
