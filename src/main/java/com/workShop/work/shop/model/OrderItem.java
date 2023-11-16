@@ -40,7 +40,6 @@ public class OrderItem implements Serializable {
         id.setOrder(orderModel);
     }
 
-
     public ProductModel getProductModel(){
         return id.getProduct();
     }

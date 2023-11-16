@@ -1,5 +1,6 @@
 package com.workShop.work.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -29,6 +30,9 @@ public class ProductModel implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryModel> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public ProductModel(){}
 
     public ProductModel(Long id, String name, String description, Double price, String imgUrl) {
@@ -37,6 +41,15 @@ public class ProductModel implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    @JsonIgnore
+    public Set<OrderModel> getOrders(){
+        Set<OrderModel> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrderModel());
+        }
+        return set;
     }
 
     public Long getId() {
