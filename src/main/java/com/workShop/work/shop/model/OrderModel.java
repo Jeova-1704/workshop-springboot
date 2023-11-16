@@ -3,17 +3,14 @@ package com.workShop.work.shop.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.workShop.work.shop.model.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order")
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
 public class OrderModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,5 +36,50 @@ public class OrderModel implements Serializable {
         this.moment = moment;
         this.orderStatus = orderStatus;
         this.client = client;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Instant moment) {
+        this.moment = moment;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public UserModel getClient() {
+        return client;
+    }
+
+    public void setClient(UserModel client) {
+        this.client = client;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderModel that = (OrderModel) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
