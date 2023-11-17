@@ -22,4 +22,8 @@ public class UserService {
         Optional<UserModel> obj = userRepository.findById(id);
         return obj.get();
     }
+
+    public UserModel saveUser(UserModel user) {
+        return userRepository.save(user);
+    }
 }
