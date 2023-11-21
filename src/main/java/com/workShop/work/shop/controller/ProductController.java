@@ -1,9 +1,7 @@
 package com.workShop.work.shop.controller;
 
 import com.workShop.work.shop.model.ProductModel;
-import com.workShop.work.shop.model.UserModel;
 import com.workShop.work.shop.services.ProductService;
-import com.workShop.work.shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

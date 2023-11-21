@@ -4,7 +4,6 @@ import com.workShop.work.shop.model.OrderModel;
 import com.workShop.work.shop.model.ProductModel;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 import java.io.Serial;

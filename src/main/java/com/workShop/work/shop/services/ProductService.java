@@ -1,9 +1,7 @@
 package com.workShop.work.shop.services;
 
 import com.workShop.work.shop.model.ProductModel;
-import com.workShop.work.shop.model.UserModel;
 import com.workShop.work.shop.repositories.ProductRepository;
-import com.workShop.work.shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
