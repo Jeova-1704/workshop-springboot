@@ -40,6 +40,11 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UserModel> update(@PathVariable Long id, @RequestBody UserModel obj) {
+        obj = userService.update(id, obj);
+        return ResponseEntity.ok().body(obj);
     }
 }
