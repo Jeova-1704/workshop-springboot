@@ -4,11 +4,10 @@ import com.workShop.work.shop.model.ProductModel;
 import com.workShop.work.shop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -27,6 +26,25 @@ public class ProductController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductModel> findById(@PathVariable Long id) {
         ProductModel product = productService.findById(id);
+        return ResponseEntity.ok().body(product);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductModel> insertProduct(@RequestBody ProductModel product) {
+        ProductModel novoProduto = productService.saveProduct(product);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoProduto.getId()).toUri();
+        return ResponseEntity.created(uri).body(novoProduto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductModel> update(@PathVariable Long id, @RequestBody ProductModel product) {
+        product = productService.update(id, product);
         return ResponseEntity.ok().body(product);
     }
 }
