@@ -1,9 +1,13 @@
 package com.workShop.work.shop.services;
 
+import com.workShop.work.shop.controller.exception.DatabaseException;
 import com.workShop.work.shop.model.UserModel;
 import com.workShop.work.shop.repositories.UserRepository;
 import com.workShop.work.shop.services.exception.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +33,24 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        try {
+            UserModel user = findById(id);
+            userRepository.delete(user);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public UserModel update(long id, UserModel obj) {
-        UserModel user = userRepository.getReferenceById(id);
-        updateData(user, obj);
-        return userRepository.save(user);
+        try {
+            UserModel user = userRepository.getReferenceById(id);
+            updateData(user, obj);
+            return userRepository.save(user);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(UserModel user, UserModel obj) {
