@@ -43,7 +43,7 @@ public class UserService {
         }
     }
 
-    public UserModel update(long id, UserModel obj) {
+    public UserModel update(Long id, UserModel obj) {
         try {
             UserModel user = userRepository.getReferenceById(id);
             updateData(user, obj);

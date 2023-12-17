@@ -28,7 +28,7 @@ public class ProductService {
 
     public ProductModel findById(Long id) {
         Optional<ProductModel> obj = productRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public ProductModel saveProduct(ProductModel product) {
